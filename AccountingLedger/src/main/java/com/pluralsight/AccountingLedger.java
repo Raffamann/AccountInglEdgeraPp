@@ -31,7 +31,6 @@ public class AccountingLedger {
         System.out.println("X- Exit");
 
         String userChoice = scanner.nextLine(); // get the user's choice/input
-        scanner.nextLine();
 
         if (userChoice.equalsIgnoreCase("D")) { // if user chooses "D"
             toCsv(addDeposit());
@@ -56,7 +55,7 @@ public class AccountingLedger {
     public static void toCsv(String action) {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
-        String input = (date + "|" + time.format(DateTimeFormatter.ofPattern("HH;mm;ss")) + "|" + action + "\n");
+        String input = (date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "|" + action + "\n");
 
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
@@ -107,12 +106,12 @@ public class AccountingLedger {
         System.out.println("H- Home");
 
         String userChoice = scanner.nextLine();
-        scanner.nextLine();
+
 
         if (userChoice.equalsIgnoreCase("A")) {
             allEntries();
             ledgerMenu();
-        } else if (userChoice.equalsIgnoreCase("D")) {
+        } else if (userChoice.equals("D")||userChoice.equals("d")) {
             viewDeposits();
             ledgerMenu();
         } else if (userChoice.equalsIgnoreCase("P")) {
@@ -239,7 +238,7 @@ public class AccountingLedger {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 String[] date = tokens[0].split("-");
-                if (Integer.parseInt(date[0]) == currentYear) {
+                if (Integer.parseInt(date[0]) == currentYear && (Integer.parseInt(date[1]) == currentMonth -1 )) {
                     entries.add(input);
                 }
             }
@@ -256,7 +255,7 @@ public class AccountingLedger {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 String[] date = tokens[0].split("-");
-                if (Integer.parseInt(date[1]) == currentMonth && Integer.parseInt(date[0]) == currentYear) {
+                if ( Integer.parseInt(date[0]) == currentYear) {
                     entries.add(input);
                 }
             }
@@ -273,7 +272,7 @@ public class AccountingLedger {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 String[] date = tokens[0].split("-");
-                if (Integer.parseInt(date[0]) == currentYear-1) {
+                if (Integer.parseInt(date[0]) == currentYear -1) {
                     entries.add(input);
                 }
             }
