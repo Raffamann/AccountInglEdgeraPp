@@ -25,6 +25,7 @@ public class AccountingLedger {
 
     public static void homeScreen() {
         // display home screen
+        System.out.println("Home!");
         System.out.println("D- Add Deposit");
         System.out.println("P- Make a Payment (Debit)");
         System.out.println("L- Ledger");
@@ -58,10 +59,12 @@ public class AccountingLedger {
         String input = (date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "|" + action + "\n");
 
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true)); // can call new bufferedwriter and new filewriter in the same line of code and its valid
             bufferedWriter.write(input);
             // close the writer to release resources
             bufferedWriter.close();
+            System.out.println("Done!,recorded...");
+            System.out.println(" ");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -70,7 +73,7 @@ public class AccountingLedger {
     public static String addDeposit() {
         //prompt user for deposit info
         System.out.println("Please enter the deposit information ");
-        System.out.println("Please describe the deposit ");
+        System.out.println("Please describe the deposit: ");
         String description = scanner.nextLine();
         System.out.println("Who is the vendor ");
         String vendor = scanner.nextLine();
@@ -78,6 +81,7 @@ public class AccountingLedger {
         float amount = scanner.nextFloat();
         scanner.nextLine();
         return (description + "|" + vendor + "|" + amount);
+
     }
 
     public static String addPayment() {
@@ -99,6 +103,7 @@ public class AccountingLedger {
 
 
     public static void ledgerMenu() {
+        System.out.println("Ledger");
         System.out.println("A- All");
         System.out.println("D- Deposits");
         System.out.println("P- Payments");
@@ -183,8 +188,8 @@ public class AccountingLedger {
 
     public static void viewReports() {
         System.out.println("1- Month To Date");
-        System.out.println(" 2- Previous Month");
-        System.out.println(" 3- Year To Date");
+        System.out.println("2- Previous Month");
+        System.out.println("3- Year To Date");
         System.out.println("4- Previous Year");
         System.out.println("5- Search by Vendor");
         System.out.println("6- Go Back");
@@ -217,7 +222,7 @@ public class AccountingLedger {
     public static void monthToDate() {
         String input;
         try{
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.csv")); //
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 String[] date = tokens[0].split("-");
