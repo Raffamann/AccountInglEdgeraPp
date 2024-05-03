@@ -1,4 +1,5 @@
 # AccountInglEdgeraPp
+This is a progam that i coded that allows a user to store and data that the user inputs to keep track of finanial transactions.
 My Home Screen, shows user the different options.
 
 ![image](https://github.com/Raffamann/AccountInglEdgeraPp/assets/166444172/efdac11a-cd17-454f-87fc-ebe06f5aff81) 
